@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DBoW2\BowVector.cpp" />
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DBoW2\FORB.cpp" />
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DBoW2\FeatureVector.cpp" />
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DBoW2\ScoringObject.cpp" />
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DUtils\Random.cpp" />
+    <ClCompile Include="..\..\..\Thirdparty\DBoW2\DUtils\Timestamp.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\Thirdparty\DBoW2\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{80CF1551-19E2-3CFE-A0BD-7F362561372F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
