@@ -21,8 +21,9 @@
 #define SYSTEM_H
 
 //#define SAVE_TIMES
-
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 #include<stdio.h>
 #include<stdlib.h>
 #include<string>
@@ -40,6 +41,14 @@
 #include "Viewer.h"
 #include "ImuTypes.h"
 
+#ifdef _WINDOWS
+void usleep(int us) {
+	int ms = us / 1000;
+	if (ms < 1)
+		ms = 1;
+	Sleep(ms);
+}
+#endif
 
 namespace ORB_SLAM3
 {

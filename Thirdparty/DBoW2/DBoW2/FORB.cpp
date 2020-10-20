@@ -13,8 +13,9 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#ifndef _WINDOWS
 #include <stdint-gcc.h>
-
+#endif
 #include "FORB.h"
 
 using namespace std;
