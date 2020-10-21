@@ -1,6 +1,8 @@
 
 ORB_SLAM3 windows下编译说明
 
+建议vs2019编译，vs2017估计也可以。vs2015编译很慢且出错。
+
 1. 下载boost库
 官网下载： https://www.boost.org/users/download/
 https://sourceforge.net/projects/boost/files/boost-binaries/
