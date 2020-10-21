@@ -42,12 +42,7 @@
 #include "ImuTypes.h"
 
 #ifdef _WINDOWS
-void usleep(int us) {
-	int ms = us / 1000;
-	if (ms < 1)
-		ms = 1;
-	Sleep(ms);
-}
+void usleep(int us);
 #endif
 
 namespace ORB_SLAM3
@@ -87,7 +82,13 @@ class Tracking;
 class LocalMapping;
 class LoopClosing;
 
-class System
+#ifdef DLLEXPORT
+#define DLL_API __declspec(dllexport)
+#else
+#define DLL_API __declspec(dllimport)
+#endif
+
+class DLL_API System
 {
 public:
     // Input sensor

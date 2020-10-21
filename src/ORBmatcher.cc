@@ -26,8 +26,9 @@
 
 #include "Thirdparty/DBoW2/DBoW2/FeatureVector.h"
 
+#ifndef _WINDOWS
 #include<stdint-gcc.h>
-
+#endif
 using namespace std;
 
 namespace ORB_SLAM3

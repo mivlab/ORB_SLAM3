@@ -28,7 +28,7 @@
 #include<mutex>
 #include<thread>
 
-
+#define COMPILEDWITHC11
 namespace ORB_SLAM3
 {
 

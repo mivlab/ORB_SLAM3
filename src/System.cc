@@ -33,6 +33,15 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 
+#ifdef _WINDOWS
+void usleep(int us) {
+    int ms = us / 1000;
+    if (ms < 1)
+        ms = 1;
+    Sleep(ms);
+}
+#endif
+
 namespace ORB_SLAM3
 {
 
