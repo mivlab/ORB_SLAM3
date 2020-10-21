@@ -1,37 +1,34 @@
 
-ORB_SLAM3 windowsÏÂ±àÒëËµÃ÷
+ORB_SLAM3 windowsä¸‹ç¼–è¯‘è¯´æ˜Ž
 
-½¨Òévs2019±àÒë£¬vs2017¹À¼ÆÒ²¿ÉÒÔ¡£vs2015±àÒëºÜÂýÇÒ³ö´í¡£
+å»ºè®®vs2019ç¼–è¯‘ï¼Œvs2017ä¼°è®¡ä¹Ÿå¯ä»¥ã€‚vs2015ç¼–è¯‘å¾ˆæ…¢ä¸”å‡ºé”™ã€‚
 
-1. ÏÂÔØboost¿â
-¹ÙÍøÏÂÔØ£º https://www.boost.org/users/download/
+1. ä¸‹è½½booståº“
+å®˜ç½‘ä¸‹è½½ï¼š https://www.boost.org/users/download/
 https://sourceforge.net/projects/boost/files/boost-binaries/
-ÎÒÏÂÔØµÄÊÇ boost_1_74_0-msvc-14.2-64.exe£¬Ë«»÷½âÑ¹µÃµ½boost_1_74_0Ä¿Â¼¡£
+æˆ‘ä¸‹è½½çš„æ˜¯ boost_1_74_0-msvc-14.2-64.exeï¼ŒåŒå‡»è§£åŽ‹å¾—åˆ°boost_1_74_0ç›®å½•ã€‚
 
-2. ½âÑ¹×Öµä 
+2. è§£åŽ‹å­—å…¸ 
 ocabulary\ORBvoc.txt.tar.gz
-½âÑ¹µ½µ±Ç°Ä¿Â¼¡£
+è§£åŽ‹åˆ°å½“å‰ç›®å½•ã€‚
 
-3. buildvs19 ÏÂ´ò¿ªORM_SLAM3.sln£¬Ö±½Ó±àÒë¼´¿ÉÔËÐÐ¡£
-ÎÒÊÔÁËmono_kitti£¬ÆäËû²âÊÔ³ÌÐòÒ²¶¼¿ÉÒÔ£¬Ö»ÐèÒª°Ñ°üº¬Ä¿Â¼¡¢¿âÄ¿Â¼¡¢ÒÀÀµ¿âÉèÖÃÓëmono_kittiÏàÍ¬¼´¿É¡£
-mono_kitti ÔËÐÐµÄÃüÁîÐÐÊ¾Àý£º
+3. buildvs19 ä¸‹æ‰“å¼€ORM_SLAM3.slnï¼Œç›´æŽ¥ç¼–è¯‘å³å¯è¿è¡Œã€‚
+æˆ‘è¯•äº†mono_kittiï¼Œå…¶ä»–æµ‹è¯•ç¨‹åºä¹Ÿéƒ½å¯ä»¥ï¼Œåªéœ€è¦æŠŠåŒ…å«ç›®å½•ã€åº“ç›®å½•ã€ä¾èµ–åº“è®¾ç½®ä¸Žmono_kittiç›¸åŒå³å¯ã€‚
+mono_kitti è¿è¡Œçš„å‘½ä»¤è¡Œç¤ºä¾‹ï¼š
 ..\..\..\Vocabulary\ORBvoc.txt ..\..\..\Examples\Monocular\KITTI00-02.yaml F:\data\kitti\dataset\sequences\00
 
-£¨ÏÂÃæÕâÐ©¿âÎÒÒÑ¾­±àÒëºÃ£¬¿ÉÖ±½ÓÊ¹ÓÃ£¬Äã²»ÐèÒª´ÓÍ·±àÒë£©
-´ÓÁã±àÒë£º
-1. ±àÒëThirdparty/DBoW2
-ÓÃcmake´´½¨¹¤³Ì£¬´ò¿ª¹¤³Ì£¬boostÄ¿Â¼¼ÓÈëµ½DBoW2¸½¼Ó°üº¬Ä¿Â¼£¬±àÒë¼´¿É¡£
+ï¼ˆä¸‹é¢è¿™äº›åº“æˆ‘å·²ç»ç¼–è¯‘å¥½ï¼Œå¯ç›´æŽ¥ä½¿ç”¨ï¼Œä½ ä¸éœ€è¦ä»Žå¤´ç¼–è¯‘ï¼‰
+ä»Žé›¶ç¼–è¯‘ï¼š
+1. ç¼–è¯‘Thirdparty/DBoW2
+ç”¨cmakeåˆ›å»ºå·¥ç¨‹ï¼Œæ‰“å¼€å·¥ç¨‹ï¼Œboostç›®å½•åŠ å…¥åˆ°DBoW2é™„åŠ åŒ…å«ç›®å½•ï¼Œç¼–è¯‘å³å¯ã€‚
 
-2. ±àÒë Thirdparty/g2o
-g2oÄ¿Â¼ÏÂµÄÓÐ¿ÉÄÜ»á±àÒë³ö´í£¬ÎÒ¼ÓÁË¸ö°æ±¾ g2o_win¡£
-¿ÉÒÔÖ±½Ó´ò¿ª g2o_win\buildvs15 ÏÂµÄ¹¤³Ì±àÒë¡£
-¹¤³ÌÓÒ¼üÊôÐÔ£¬C/C++£¬ËùÓÐÑ¡Ïî£¬¼ÓÉÏ¸½¼ÓÑ¡Ïî /bigobj £¬ÓëÒÑÓÐµÄÏîÓÃ¿Õ¸ñ¸ô¿ª¡£
-Õâ¸ö±àµÄÊ±¼äÓÐµã³¤£¬ÎÒ°Ñ¶à´¦ÀíÆ÷±àÒëÉèÎª·ñ£¬·ÀÖ¹ËÀ»ú¡£
+2. ç¼–è¯‘ Thirdparty/g2o
+ç”¨cmakeåˆ›å»ºå·¥ç¨‹ï¼Œç¼–è¯‘ã€‚
 
-3. ±àÒëORM_SLAM3
-ÎÒ°Ñcmakelist.txt Àïopencv£¬eigenµÈµÄÒÀÀµÈ¥µôÁË£¬Éú³Évs¹¤³ÌÖ®ºó£¬ÒªÊÖ¶¯¼Óµ½¸½¼Ó°üº¬Ä¿Â¼¡£
-Ç°ÃæboostµÄÄ¿Â¼Ò²Òª¼ÓÉÏ£¬pangolinµÄÄ¿Â¼Ò²¼ÓÉÏ¡£
-ÐèÒªÓÃµ½glew£¬¹ÙÍøÏÂÔØ£¬ThirdpartyÄ¿Â¼ÏÂÒÑ°üº¬¡£
-¶à´¦ÀíÆ÷±àÒëÉ÷¿ª£¬Õ¼ÓÃÄÚ´æ»á·Ç³£´ó¡£
+3. ç¼–è¯‘ORM_SLAM3
+æˆ‘æŠŠcmakelist.txt é‡Œopencvï¼Œeigenç­‰çš„ä¾èµ–åŽ»æŽ‰äº†ï¼Œç”Ÿæˆvså·¥ç¨‹ä¹‹åŽï¼Œè¦æ‰‹åŠ¨åŠ åˆ°é™„åŠ åŒ…å«ç›®å½•ã€‚
+å‰é¢boostçš„ç›®å½•ä¹Ÿè¦åŠ ä¸Šï¼Œpangolinçš„ç›®å½•ä¹ŸåŠ ä¸Šã€‚
+éœ€è¦ç”¨åˆ°glewï¼Œå®˜ç½‘ä¸‹è½½ï¼ŒThirdpartyç›®å½•ä¸‹å·²åŒ…å«ã€‚
+å¤šå¤„ç†å™¨ç¼–è¯‘æ…Žå¼€ï¼Œå ç”¨å†…å­˜ä¼šéžå¸¸å¤§ã€‚
 
 
