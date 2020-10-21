@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;G:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;E:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -159,8 +159,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>..\Thirdparty\DBoW2\lib\Release\DBoW2.lib;..\Thirdparty\g2o\buildvs19\Release\g2o.lib;pangolin.lib;opencv_world343.lib;freeglut.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:\software\develop\boost\boost_1_74_0\lib64-msvc-14.2;..\opencv3.4.3;..\Thirdparty\Pangolin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>..\Thirdparty\DBoW2\lib\Release\DBoW2.lib;..\Thirdparty\g2o\buildvs19\Release\g2o.lib;pangolin.lib;opencv_world343.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\software\develop\boost\boost_1_74_0\lib64-msvc-14.2;..\opencv3.4.3;..\Thirdparty\Pangolin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -372,14 +372,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClInclude Include="..\include\MLPnPsolver.h" />
     <ClInclude Include="..\include\TwoViewReconstruction.h" />
     <ClCompile Include="..\src\TwoViewReconstruction.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\buildvs19\ZERO_CHECK.vcxproj">
-      <Project>{112B17BB-2DEA-326F-88B1-5E8F1E5B1BAD}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

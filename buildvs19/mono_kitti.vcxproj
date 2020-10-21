@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;G:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;E:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
