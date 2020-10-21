@@ -158,8 +158,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>Release\ORB_SLAM3.lib;..\Thirdparty\DBoW2\lib\Release\DBoW2.lib;..\Thirdparty\g2o\buildvs19\Release\g2o.lib;pangolin.lib;opencv_world343.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>G:\software\develop\boost\boost_1_74_0\lib64-msvc-14.2;..\opencv3.4.3;..\Thirdparty\Pangolin;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ORB_SLAM3.lib;pangolin.lib;opencv_world343.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>E:\software\develop\boost\boost_1_74_0\lib64-msvc-14.2;..\opencv3.4.3;..\Thirdparty\Pangolin;$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -319,12 +319,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="..\Examples\Monocular\mono_kitti.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\buildvs19\ZERO_CHECK.vcxproj">
-      <Project>{112B17BB-2DEA-326F-88B1-5E8F1E5B1BAD}</Project>
-      <Name>ZERO_CHECK</Name>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </ProjectReference>
     <ProjectReference Include="..\buildvs19\ORB_SLAM3.vcxproj">
       <Project>{D6EB85DA-918D-3433-B31A-A4D11D43E4C2}</Project>
       <Name>ORB_SLAM3</Name>
