@@ -146,6 +146,9 @@ public:
     // True if local mapping is deactivated and we are performing only localization
     bool mbOnlyTracking;
 
+    //Current matches in frame
+    int mnMatchesInliers;
+
     void Reset(bool bLocMap = false);
     void ResetActiveMap(bool bLocMap = false);
 
@@ -284,9 +287,6 @@ protected:
 
     // For RGB-D inputs only. For some datasets (e.g. TUM) the depthmap values are scaled.
     float mDepthMapFactor;
-
-    //Current matches in frame
-    int mnMatchesInliers;
 
     //Last Frame, KeyFrame and Relocalisation Info
     KeyFrame* mpLastKeyFrame;

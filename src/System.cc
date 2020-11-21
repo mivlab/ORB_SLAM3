@@ -42,6 +42,11 @@ void usleep(int us) {
 }
 #endif
 
+bool has_suffix(const std::string& str, const std::string& suffix) {
+    std::size_t index = str.find(suffix, str.size() - suffix.size());
+    return (index != std::string::npos);
+}
+
 namespace ORB_SLAM3
 {
 
@@ -88,11 +93,15 @@ System::System(const string &strVocFile, const string &strSettingsFile, const eS
     cout << endl << "Loading ORB Vocabulary. This could take a while..." << endl;
 
     mpVocabulary = new ORBVocabulary();
-    bool bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+    bool bVocLoad = false; // chose loading method based on file extension
+    if (has_suffix(strVocFile, ".txt"))
+        bVocLoad = mpVocabulary->loadFromTextFile(strVocFile);
+    else
+        bVocLoad = mpVocabulary->loadFromBinaryFile(strVocFile);
     if(!bVocLoad)
     {
         cerr << "Wrong path to vocabulary. " << endl;
-        cerr << "Falied to open at: " << strVocFile << endl;
+        cerr << "Failed to open at: " << strVocFile << endl;
         exit(-1);
     }
     cout << "Vocabulary loaded!" << endl << endl;
@@ -415,7 +424,84 @@ cv::Mat System::TrackMonocular(const cv::Mat &im, const double &timestamp, const
     return Tcw;
 }
 
+cv::Mat System::TrackMonocular(const cv::Mat& im, const double& timestamp, cv::Point3f& pt, float& quality)
+{
+    if (mSensor != MONOCULAR && mSensor != IMU_MONOCULAR)
+    {
+        cerr << "ERROR: you called TrackMonocular but input sensor was not set to Monocular nor Monocular-Inertial." << endl;
+        exit(-1);
+    }
 
+    // Check mode change
+    {
+        unique_lock<mutex> lock(mMutexMode);
+        if (mbActivateLocalizationMode)
+        {
+            mpLocalMapper->RequestStop();
+
+            // Wait until Local Mapping has effectively stopped
+            while (!mpLocalMapper->isStopped())
+            {
+                usleep(1000);
+            }
+
+            mpTracker->InformOnlyTracking(true);
+            mbActivateLocalizationMode = false;
+        }
+        if (mbDeactivateLocalizationMode)
+        {
+            mpTracker->InformOnlyTracking(false);
+            mpLocalMapper->Release();
+            mbDeactivateLocalizationMode = false;
+        }
+    }
+
+    // Check reset
+    {
+        unique_lock<mutex> lock(mMutexReset);
+        if (mbReset)
+        {
+            mpTracker->Reset();
+            mbReset = false;
+            mbResetActiveMap = false;
+        }
+        else if (mbResetActiveMap)
+        {
+            cout << "SYSTEM-> Reseting active map in monocular case" << endl;
+            mpTracker->ResetActiveMap();
+            mbResetActiveMap = false;
+        }
+    }
+
+    /*if (mSensor == System::IMU_MONOCULAR)
+        for (size_t i_imu = 0; i_imu < vImuMeas.size(); i_imu++)
+            mpTracker->GrabImuData(vImuMeas[i_imu]);*/
+
+    string filename = "filename";
+    cv::Mat Tcw = mpTracker->GrabImageMonocular(im, timestamp, filename);
+
+    /*unique_lock<mutex> lock2(mMutexState);
+    mTrackingState = mpTracker->mState;
+    mTrackedMapPoints = mpTracker->mCurrentFrame.mvpMapPoints;
+    mTrackedKeyPointsUn = mpTracker->mCurrentFrame.mvKeysUn;*/
+    if (!Tcw.empty())
+    {
+        cv::Mat Rwc(3, 3, CV_32F);
+        cv::Mat twc(3, 1, CV_32F);
+        Rwc = Tcw.rowRange(0, 3).colRange(0, 3).t();
+        twc = -Rwc * Tcw.rowRange(0, 3).col(3);
+        pt.x = twc.at<float>(0, 0);
+        pt.y = twc.at<float>(1, 0);
+        pt.z = twc.at<float>(2, 0);
+        quality = mpTracker->mnMatchesInliers / 1000.0f;
+    }
+    else
+    {
+        quality = 0;
+    }
+
+    return Tcw;
+}
 
 void System::ActivateLocalizationMode()
 {
