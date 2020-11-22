@@ -15,16 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Examples\Miv\util_cv.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="..\Examples\Miv\mono_img.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Examples\Miv\util_cv.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

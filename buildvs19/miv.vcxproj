@@ -20,10 +20,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Examples\Miv\mono_img.cc" />
-    <ClCompile Include="..\Examples\Miv\util_cv.cc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\Examples\Miv\util_cv.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -139,7 +135,7 @@
       <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;E:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;D:\software\boost\boost_1_74_0;D:\software\MYNTEYES_SDK2.5.0\2.5.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..;..\include;..\include\CameraModels;..\opencv3.4.3\include;E:\software\develop\boost\boost_1_74_0;..\Thirdparty\eigen-3.3.8;..\Thirdparty\Pangolin\include;..\Thirdparty\Pangolin\buildvs15\src\include;..\Thirdparty\glew-2.1.0\include;..\Thirdparty\g2o;D:\software\boost\boost_1_74_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -150,8 +146,8 @@
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <OptimizeReferences>false</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>..\opencv3.4.3;..\Thirdparty\Pangolin;$(OutDir);D:\software\boost\boost_1_74_0\lib64-msvc-14.2;D:\software\MYNTEYES_SDK2.5.0\2.5.0\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>ORB_SLAM3.lib;pangolin.lib;opencv_world343.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;mynteye.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\opencv3.4.3;..\Thirdparty\Pangolin;$(OutDir);D:\software\boost\boost_1_74_0\lib64-msvc-14.2;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ORB_SLAM3.lib;pangolin.lib;opencv_world343.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <StackReserveSize>8388608</StackReserveSize>
       <ProgramDatabaseFile>../Examples/Miv/Release/$(TargetName).pdb</ProgramDatabaseFile>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
