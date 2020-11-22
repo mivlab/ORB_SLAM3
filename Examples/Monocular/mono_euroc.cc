@@ -26,8 +26,17 @@
 #include<opencv2/core/core.hpp>
 
 #include<System.h>
-
+#define COMPILEDWITHC11
 using namespace std;
+
+#ifdef _WINDOWS
+void usleep(int us) {
+    int ms = us / 1000;
+    if (ms < 1)
+        ms = 1;
+    Sleep(ms);
+}
+#endif
 
 void LoadImages(const string &strImagePath, const string &strPathTimes,
                 vector<string> &vstrImages, vector<double> &vTimeStamps);

@@ -28,13 +28,22 @@
 
 #include<System.h>
 #include "ImuTypes.h"
-
+#define COMPILEDWITHC11
 using namespace std;
 
 void LoadImages(const string &strImagePath, const string &strPathTimes,
                 vector<string> &vstrImages, vector<double> &vTimeStamps);
 
 void LoadIMU(const string &strImuPath, vector<double> &vTimeStamps, vector<cv::Point3f> &vAcc, vector<cv::Point3f> &vGyro);
+
+#ifdef _WINDOWS
+void usleep(int us) {
+    int ms = us / 1000;
+    if (ms < 1)
+        ms = 1;
+    Sleep(ms);
+}
+#endif
 
 double ttrack_tot = 0;
 int main(int argc, char *argv[])

@@ -76,7 +76,7 @@ int main(int argc, char **argv)
             if (Pts.size() > 0)
                 Pts.push_back(Pts[Pts.size() - 1]);
             else
-                //Pts.push_back(cv::Point2f(0, 0));
+                Pts.push_back(cv::Point2f(0, 0));
                 continue;
         }
 
