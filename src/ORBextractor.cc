@@ -57,6 +57,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <vector>
 #include <iostream>
+#include <fstream>
 
 #include "ORBextractor.h"
 
@@ -534,6 +535,11 @@ namespace ORB_SLAM3
 
     }
 
+    bool cmp(const pair<int, ExtractorNode*>& a, const pair<int, ExtractorNode*>& b)
+    {
+        return a.first < b.first;
+    }
+
     vector<cv::KeyPoint> ORBextractor::DistributeOctTree(const vector<cv::KeyPoint>& vToDistributeKeys, const int &minX,
                                                          const int &maxX, const int &minY, const int &maxY, const int &N, const int &level)
     {
@@ -662,6 +668,7 @@ namespace ORB_SLAM3
                 }
             }
 
+            ofstream outfile("diff0.txt");
             // Finish if there are more nodes than required features
             // or all nodes contain just one point
             if((int)lNodes.size()>=N || (int)lNodes.size()==prevSize)
@@ -679,7 +686,10 @@ namespace ORB_SLAM3
                     vector<pair<int,ExtractorNode*> > vPrevSizeAndPointerToNode = vSizeAndPointerToNode;
                     vSizeAndPointerToNode.clear();
 
-                    sort(vPrevSizeAndPointerToNode.begin(),vPrevSizeAndPointerToNode.end());
+                    //sort(vPrevSizeAndPointerToNode.begin(),vPrevSizeAndPointerToNode.end());
+                    stable_sort(vPrevSizeAndPointerToNode.begin(), vPrevSizeAndPointerToNode.end(), cmp);
+                    for (auto& v : vPrevSizeAndPointerToNode)
+                        outfile << v.first << ", " << v.second->UL.x << ", " << v.second->UL.y << endl;
                     for(int j=vPrevSizeAndPointerToNode.size()-1;j>=0;j--)
                     {
                         ExtractorNode n1,n2,n3,n4;
@@ -734,6 +744,7 @@ namespace ORB_SLAM3
 
                 }
             }
+            outfile.close();
         }
 
         // Retain the best point in each node

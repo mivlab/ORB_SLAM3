@@ -177,7 +177,7 @@ vector<Map*> Atlas::GetAllMaps()
         }
     };
     vector<Map*> vMaps(mspMaps.begin(),mspMaps.end());
-    sort(vMaps.begin(), vMaps.end(), compFunctor());
+    stable_sort(vMaps.begin(), vMaps.end(), compFunctor());
     return vMaps;
 }
 
@@ -274,7 +274,7 @@ void Atlas::PreSave()
         }
     };
     std::copy(mspMaps.begin(), mspMaps.end(), std::back_inserter(mvpBackupMaps));
-    sort(mvpBackupMaps.begin(), mvpBackupMaps.end(), compFunctor());
+    stable_sort(mvpBackupMaps.begin(), mvpBackupMaps.end(), compFunctor());
 
     std::set<GeometricCamera*> spCams(mvpCameras.begin(), mvpCameras.end());
     cout << "There are " << spCams.size() << " cameras in the atlas" << endl;

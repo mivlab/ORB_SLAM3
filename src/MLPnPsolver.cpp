@@ -125,8 +125,8 @@ namespace ORB_SLAM3 {
 	        // Get min set of points
 	        for(short i = 0; i < mRansacMinSet; ++i)
 	        {
-	            int randi = DUtils::Random::RandomInt(0, vAvailableIndices.size()-1);
-
+	            //int randi = DUtils::Random::RandomInt(0, vAvailableIndices.size()-1);
+                int randi = (i * 100) % vAvailableIndices.size();
 	            int idx = vAvailableIndices[randi];
 
                 bearingVecs[i] = mvBearingVecs[idx];

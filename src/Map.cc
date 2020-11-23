@@ -113,7 +113,7 @@ void Map::EraseKeyFrame(KeyFrame *pKF)
         if(pKF->mnId == mpKFlowerID->mnId)
         {
             vector<KeyFrame*> vpKFs = vector<KeyFrame*>(mspKeyFrames.begin(),mspKeyFrames.end());
-            sort(vpKFs.begin(),vpKFs.end(),KeyFrame::lId);
+            stable_sort(vpKFs.begin(),vpKFs.end(),KeyFrame::lId);
             mpKFlowerID = vpKFs[0];
         }
     }

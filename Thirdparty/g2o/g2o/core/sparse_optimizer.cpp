@@ -482,8 +482,8 @@ namespace g2o{
   void SparseOptimizer::sortVectorContainers()
   {
     // sort vector structures to get deterministic ordering based on IDs
-    sort(_activeVertices.begin(), _activeVertices.end(), VertexIDCompare());
-    sort(_activeEdges.begin(), _activeEdges.end(), EdgeIDCompare());
+    stable_sort(_activeVertices.begin(), _activeVertices.end(), VertexIDCompare());
+    stable_sort(_activeEdges.begin(), _activeEdges.end(), EdgeIDCompare());
   }
 
   void SparseOptimizer::clear() {

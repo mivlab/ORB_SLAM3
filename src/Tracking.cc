@@ -1788,7 +1788,6 @@ void Tracking::Track()
         mpFrameDrawer->Update(this);
         if(!mCurrentFrame.mTcw.empty())
             mpMapDrawer->SetCurrentCameraPose(mCurrentFrame.mTcw);
-
         if(bOK || mState==RECENTLY_LOST)
         {
             // Update motion model
@@ -2390,7 +2389,7 @@ void Tracking::UpdateLastFrame()
     if(vDepthIdx.empty())
         return;
 
-    sort(vDepthIdx.begin(),vDepthIdx.end());
+    stable_sort(vDepthIdx.begin(),vDepthIdx.end());
 
     // We insert all close points (depth<mThDepth)
     // If less than 100 close points, we insert the 100 closest ones.
@@ -2789,6 +2788,9 @@ void Tracking::CreateNewKeyFrame()
         return;
 
     KeyFrame* pKF = new KeyFrame(mCurrentFrame,mpAtlas->GetCurrentMap(),mpKeyFrameDB);
+    ofstream outfile("diff2.txt");
+    outfile << pKF->GetRotation() << pKF->GetTranslation() << pKF->GetVelocity();
+    outfile.close();
 
     if(mpAtlas->isImuInitialized())
         pKF->bImu = true;
@@ -2836,7 +2838,7 @@ void Tracking::CreateNewKeyFrame()
 
         if(!vDepthIdx.empty())
         {
-            sort(vDepthIdx.begin(),vDepthIdx.end());
+            stable_sort(vDepthIdx.begin(),vDepthIdx.end());
 
             int nPoints = 0;
             for(size_t j=0; j<vDepthIdx.size();j++)

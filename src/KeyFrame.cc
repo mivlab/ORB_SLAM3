@@ -209,6 +209,11 @@ void KeyFrame::AddConnection(KeyFrame *pKF, const int &weight)
     UpdateBestCovisibles();
 }
 
+static bool cmp(const pair<int, KeyFrame*>& a, const pair<int, KeyFrame*>& b)
+{
+    return a.first < b.first;
+}
+
 void KeyFrame::UpdateBestCovisibles()
 {
     unique_lock<mutex> lock(mMutexConnections);
@@ -216,8 +221,11 @@ void KeyFrame::UpdateBestCovisibles()
     vPairs.reserve(mConnectedKeyFrameWeights.size());
     for(map<KeyFrame*,int>::iterator mit=mConnectedKeyFrameWeights.begin(), mend=mConnectedKeyFrameWeights.end(); mit!=mend; mit++)
        vPairs.push_back(make_pair(mit->second,mit->first));
-
-    sort(vPairs.begin(),vPairs.end());
+    ofstream outfile("diff1.txt");
+    stable_sort(vPairs.begin(),vPairs.end(),cmp);
+    for (auto& vP : vPairs)
+        outfile << vP.first << vP.second->nNextId << vP.second->mnId << vP.second->mnFrameId << mTimeStamp << endl;
+    outfile.close();
     list<KeyFrame*> lKFs;
     list<int> lWs;
     for(size_t i=0, iend=vPairs.size(); i<iend;i++)
@@ -455,7 +463,7 @@ void KeyFrame::UpdateConnections(bool upParent)
         pKFmax->AddConnection(this,nmax);
     }
 
-    sort(vPairs.begin(),vPairs.end());
+    stable_sort(vPairs.begin(),vPairs.end());
     list<KeyFrame*> lKFs;
     list<int> lWs;
     for(size_t i=0; i<vPairs.size();i++)
@@ -863,7 +871,7 @@ float KeyFrame::ComputeSceneMedianDepth(const int q)
         }
     }
 
-    sort(vDepths.begin(),vDepths.end());
+    stable_sort(vDepths.begin(),vDepths.end());
 
     return vDepths[(vDepths.size()-1)/q];
 }

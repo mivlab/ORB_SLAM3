@@ -187,8 +187,8 @@ cv::Mat PnPsolver::iterate(int nIterations, bool &bNoMore, vector<bool> &vbInlie
         // Get min set of points
         for(short i = 0; i < mRansacMinSet; ++i)
         {
-            int randi = DUtils::Random::RandomInt(0, vAvailableIndices.size()-1);
-
+            //int randi = DUtils::Random::RandomInt(0, vAvailableIndices.size()-1);
+            int randi = (i * 100) % vAvailableIndices.size();
             int idx = vAvailableIndices[randi];
 
             add_correspondence(mvP3Dw[idx].x,mvP3Dw[idx].y,mvP3Dw[idx].z,mvP2D[idx].x,mvP2D[idx].y);

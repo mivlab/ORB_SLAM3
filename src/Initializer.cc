@@ -85,7 +85,8 @@ bool Initializer::Initialize(const Frame &CurrentFrame, const vector<int> &vMatc
         // Select a minimum set
         for(size_t j=0; j<8; j++)
         {
-            int randi = DUtils::Random::RandomInt(0,vAvailableIndices.size()-1);
+            //int randi = DUtils::Random::RandomInt(0,vAvailableIndices.size()-1);
+            int randi = (it * 100 + j * 1000) % vAvailableIndices.size();
             int idx = vAvailableIndices[randi];
 
             mvSets[it][j] = idx;
@@ -892,7 +893,7 @@ int Initializer::CheckRT(const cv::Mat &R, const cv::Mat &t, const vector<cv::Ke
 
     if(nGood>0)
     {
-        sort(vCosParallax.begin(),vCosParallax.end());
+        stable_sort(vCosParallax.begin(),vCosParallax.end());
 
         size_t idx = min(50,int(vCosParallax.size()-1));
         parallax = acos(vCosParallax[idx])*180/CV_PI;
