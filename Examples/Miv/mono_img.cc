@@ -1,21 +1,3 @@
-/**
-* This file is part of ORB-SLAM3
-*
-* Copyright (C) 2017-2020 Carlos Campos, Richard Elvira, Juan J. Gómez Rodríguez, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
-* Copyright (C) 2014-2016 Raúl Mur-Artal, José M.M. Montiel and Juan D. Tardós, University of Zaragoza.
-*
-* ORB-SLAM3 is free software: you can redistribute it and/or modify it under the terms of the GNU General Public
-* License as published by the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-*
-* ORB-SLAM3 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even
-* the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License along with ORB-SLAM3.
-* If not, see <http://www.gnu.org/licenses/>.
-*/
-
 #include<iostream>
 #include<algorithm>
 #include<fstream>
@@ -26,18 +8,17 @@
 
 using namespace std;
 
-void DrawTrajectory(cv::Mat mShowImg, std::vector<cv::Point2f> mPts);
+void DrawTrajectory(cv::Mat mShowImg, vector<cv::Point2f> mPts);
 
 int main(int argc, char **argv)
 {
-    if(argc != 4)
+    if(argc < 4)
     {
         cerr << endl << "Usage: ./mono_kitti path_to_vocabulary path_to_settings path_to_sequence" << endl;
         return 1;
     }
 
     ofstream outFile("traj.txt");
-    int start = 1;
     cv::Mat showImg(400, 640*2, CV_8UC1);
     showImg.setTo(255);
 
@@ -48,40 +29,42 @@ int main(int argc, char **argv)
     cout << "Start processing sequence ..." << endl;
 
     // Main loop
-    cv::Mat im;
+    cv::Mat im, Tcw;
     char name[100];
-    std::vector<cv::Point2f> Pts, newPts;
-    for(int ni=start; ni< 500; ni++)
+    vector<cv::Point2f> Pts;
+    for(int ni = 0; ni < 500; ni++)
     {
         // Read image from file
-        sprintf(name, "%s/left_%06d.jpg", argv[3], ni);
+        snprintf(name, sizeof(name),"%s/left_%06d.jpg", argv[3], ni);
         im = cv::imread(name, CV_LOAD_IMAGE_GRAYSCALE);
-        double tframe = ni;
+        double tframe = ni; // vTimestamps[ni];
 
         if(im.empty())
-        {
             continue;
-        }
+    
+        // Pass the image to the SLAM system
+        Tcw = SLAM.TrackMonocular(im, tframe);
 
         cv::Point3f pt;
-        float quality;
-        // Pass the image to the SLAM system
-        SLAM.TrackMonocular(im,tframe, pt, quality);
-        
-        cout << "frame " << ni << "\t" << pt.x << "\t" << pt.z << endl;
-        if (quality > 0)
+        if (!Tcw.empty()){
+            cv::Mat Rwc(3, 3, CV_32F);
+            cv::Mat twc(3, 1, CV_32F);
+            Rwc = Tcw.rowRange(0, 3).colRange(0, 3).t();
+            twc = -Rwc * Tcw.rowRange(0, 3).col(3);
+            pt.x = twc.at<float>(0, 0);
+            pt.y = twc.at<float>(1, 0);
+            pt.z = twc.at<float>(2, 0);
             Pts.push_back(cv::Point2f(pt.x, pt.z));
-        else
-        {
+        }
+        else {
             if (Pts.size() > 0)
                 Pts.push_back(Pts[Pts.size() - 1]);
             else
                 Pts.push_back(cv::Point2f(0, 0));
-                continue;
+            continue;
         }
-
-        printf("q%.2f\t%d\n", quality, ni);
-        printf("#--------------------------------------#\n");
+        
+        cout << "frame " << tframe << "\t" << pt.x << "\t" << pt.z << endl;
 
         im.copyTo(showImg(cv::Rect(0, 0, showImg.cols / 2, showImg.rows)));
         DrawTrajectory(showImg(cv::Rect(showImg.cols / 2, 0, showImg.cols / 2, showImg.rows)), Pts);
@@ -100,7 +83,7 @@ int main(int argc, char **argv)
     return 0;
 }
 
-void DrawTrajectory(cv::Mat mShowImg, std::vector<cv::Point2f> mPts)
+void DrawTrajectory(cv::Mat mShowImg, vector<cv::Point2f> mPts)
 {
     int width = mShowImg.cols;
     int height = mShowImg.rows;
@@ -109,7 +92,6 @@ void DrawTrajectory(cv::Mat mShowImg, std::vector<cv::Point2f> mPts)
     static float showScale = 10;
     int rangePix = (width < height ? width : height);
     int margin = rangePix / 4;
-    int x, y;
 
     if (mPts.size() < 1)
         return;
